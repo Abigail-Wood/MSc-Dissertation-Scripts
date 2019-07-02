@@ -3,14 +3,18 @@
 import argparse
 
 from Bio.Blast import NCBIXML # Biopython version 1.73
+import pandas as pd # Pandas version 0.24.2
 
 def parse_args():
     """ Parse command-line arguments."""
     parser = argparse.ArgumentParser()
     parser.add_argument(
-        '--input', required = True, help='Input file in BLAST XML format.')
+        '-i','--input', required = True,
+        help='Input file in BLAST XML format.')
     parser.add_argument(
-        '--output', required = True, help='Output file.')
+        '-o','--output', required = True, help='Output file (CSV format).')
+    parser.add_argument(
+        '-a','--annotation', help='Annotation file (CSV format).')
     return parser.parse_args()
 
 def read(file):
@@ -19,7 +23,7 @@ def read(file):
 
 def extract_hits(result_handle, output):
     """ Extracts all hits from BLAST XML format output in CSV format.
-    Returns:
+    Output:
         Query id
         Hit identifier
         Gene name
@@ -31,7 +35,7 @@ def extract_hits(result_handle, output):
     blast_records = list(blast_records)
     with open(f"{output}.csv", 'w+') as f:
         f.write("query,hit identifier,gene,length,e value,"
-                + f"total searches and hits,{len(blast_records)}")
+                + f"total searches and hits,{len(blast_records)}\n")
         for blast_record in blast_records:
             for alignment in blast_record.alignments:
                 if alignment.title: # if a hit was found for a query
@@ -43,7 +47,14 @@ def extract_hits(result_handle, output):
 
 query_gene_dict = {}
 def extract_gene_list(output):
-    """ Extracts list of genes and matched query ids from CSV file of hits."""
+    """ Extracts list of genes and matched query ids from CSV file of hits.
+
+    Returns:
+        List of genes, for use in annotation.
+
+    Outputs:
+        Output file with genes and matched query ids in CSV format.
+    """
     with open(f"{output}.csv",'r') as f:
         for line in f.readlines():
             line= line.strip().split(',')
@@ -54,15 +65,32 @@ def extract_gene_list(output):
                     query_gene_dict[line[2]].append(line[0])
             else: # add gene to dictionary keys with id value
                 query_gene_dict[line[2]] = [line[0]]
+    list_genes = []
     with open(f"{output}_unique_genes.csv", 'w+') as f:
         for key, value in query_gene_dict.items():
+            list_genes.append(key)
             f.write(f"{key},{','.join(value)}\n")
+    return list_genes
+
+def annotate(list_genes,annotation_file,output):
+    df = pd.read_csv(annotation_file)
+    df2 = df[df.name.isin(list_genes)]
+    with open(f"{output}.log", 'w+') as f:
+        f.write(f"Total unique genes: {len(list_genes)-1}\n")
+        f.write("Gene annotations not found:\n")
+        for gene in list_genes:
+            if gene == 'gene':
+                pass
+            elif gene not in df['name'].unique():
+                f.write(f"{gene}\n")
+    return df2
 
 def main():
     args = parse_args()
     result_handle = read(args.input)
     extract_hits(result_handle, args.output)
-    extract_gene_list(args.output)
+    list_genes = extract_gene_list(args.output)
+    annotate(list_genes, args.annotation, args.output)
 
 if __name__ == "__main__":
     main()
