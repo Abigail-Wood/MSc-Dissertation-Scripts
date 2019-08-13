@@ -32,13 +32,14 @@ def extract_hits(result_handle, output):
         Length
         Bits
         Identities
+        Percentage Identity (calculated using identities/length * 100)
         E value
         Total searches and hits
     """
     blast_records = NCBIXML.parse(result_handle) # returns an iterator.
     blast_records = list(blast_records)
     with open(f"{output}.csv", 'w+') as f:
-        f.write(f"query,hit identifier,gene,transcript,ensembl,length,bits,identities,e value,ensemblfamily,total searches and hits,{len(blast_records)}\n")
+        f.write(f"query,hit identifier,gene,transcript,ensembl,length,bits,identities,percent_identity,e value,ensemblfamily,total searches and hits,{len(blast_records)}\n")
         for blast_record in blast_records:
             for alignment in blast_record.alignments:
                 if alignment.title: # if a hit was found for a query
@@ -51,6 +52,7 @@ def extract_hits(result_handle, output):
                                 + f"{alignment.length},"
                                 + f"{hsp.bits},"
                                 + f"{hsp.identities},"
+                                + f"{hsp.identities / alignment.length * 100},"
                                 + f"{hsp.expect},")
                         if len(id)>=6:
                             f.write(f"{id[5]}\n")
@@ -88,7 +90,6 @@ def extract_gene_list(output):
 
 def annotate(list_genes,annotation_file,output):
     """TODO: add docstring"""
-    print(list_genes)
     df = pd.read_csv(annotation_file)
     df2 = df[df.ensembl.isin(list_genes)]
     with open(f"{output}.log", 'w+') as f:
