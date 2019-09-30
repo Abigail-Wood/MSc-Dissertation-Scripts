@@ -1,0 +1,118 @@
+#NEXUS
+begin taxa;
+	dimensions ntax=16;
+	taxlabels
+	TTRE_0000228001[&!color=#800080]
+	TTRE_0000321401[&!color=#ff0000]
+	TTRE_0000615401[&!color=#0000ff]
+	TTRE_0000671901[&!color=#0000ff]
+	'BMR1B Human bone morphogenetic protein receptor type 1B'[&!color=#800080]
+	'AVR2A Human activin receptor type 2A'[&!color=#0000ff]
+	'BMR1A Human bone morphogenetic protein receptor type 1A'[&!color=#800080]
+	'ACV1B Human activin receptor type 1B'[&!color=#800080]
+	'TGFR1 Human TGF-beta receptor type 1'[&!color=#800080]
+	'ACVL1 Human serine/threonine-protein kinase receptor R3'[&!color=#800080]
+	'TGFR2 Human TGF-beta receptor type 2'[&!color=#0000ff]
+	'ACVR1 Human activin receptor type 1'[&!color=#800080]
+	'AVR2B Human activin receptor type 2B'[&!color=#0000ff]
+	'BMPR2 Human bone morphogenetic protein receptor type 2'[&!color=#0000ff]
+	'AMHR2 Human anti-Muellerian hormone type 2 receptor'[&!color=#0000ff]
+	'ACV1C Human activin receptor type 1C'[&!color=#800080]
+;
+end;
+
+begin trees;
+	tree tree_1 = [&R] ((((('BMR1A Human bone morphogenetic protein receptor type 1A':0.183869,'BMR1B Human bone morphogenetic protein receptor type 1B':0.111505)[&"bootstrap values"=1.0]:0.224176,TTRE_0000228001:0.540558)[&"bootstrap values"=0.95]:0.168192,('ACVL1 Human serine/threonine-protein kinase receptor R3':0.430697,'ACVR1 Human activin receptor type 1':0.201383)[&"bootstrap values"=1.0]:0.405606)[&"bootstrap values"=0.61]:0.135479,('ACV1C Human activin receptor type 1C':0.195109,('ACV1B Human activin receptor type 1B':0.14783,'TGFR1 Human TGF-beta receptor type 1':0.163894)[&"bootstrap values"=0.68]:0.069524)[&"bootstrap values"=0.98]:0.227114)[&"bootstrap values"=0.77]:0.15234,TTRE_0000321401:0.731865,((('AMHR2 Human anti-Muellerian hormone type 2 receptor':1.505171,'BMPR2 Human bone morphogenetic protein receptor type 2':0.628519)[&"bootstrap values"=0.74]:0.294553,TTRE_0000671901:1.663421)[&"bootstrap values"=0.75]:0.255008,('TGFR2 Human TGF-beta receptor type 2':1.162637,(TTRE_0000615401:1.244315,('AVR2A Human activin receptor type 2A':0.213,'AVR2B Human activin receptor type 2B':0.23215)[&"bootstrap values"=1.0]:0.292485)[&"bootstrap values"=0.91]:0.211015)[&"bootstrap values"=0.81]:0.298125)[&"bootstrap values"=1.0]:1.23999);
+end;
+
+begin figtree;
+	set appearance.backgroundColorAttribute="Default";
+	set appearance.backgroundColour=#ffffff;
+	set appearance.branchColorAttribute="User selection";
+	set appearance.branchColorGradient=false;
+	set appearance.branchLineWidth=1.0;
+	set appearance.branchMinLineWidth=0.0;
+	set appearance.branchWidthAttribute="Fixed";
+	set appearance.foregroundColour=#000000;
+	set appearance.hilightingGradient=false;
+	set appearance.selectionColour=#2d3680;
+	set branchLabels.colorAttribute="User selection";
+	set branchLabels.displayAttribute="Branch times";
+	set branchLabels.fontName="sansserif";
+	set branchLabels.fontSize=8;
+	set branchLabels.fontStyle=0;
+	set branchLabels.isShown=false;
+	set branchLabels.significantDigits=4;
+	set layout.expansion=0;
+	set layout.layoutType="RECTILINEAR";
+	set layout.zoom=0;
+	set legend.attribute="bootstrap values";
+	set legend.fontSize=10.0;
+	set legend.isShown=false;
+	set legend.significantDigits=4;
+	set nodeBars.barWidth=4.0;
+	set nodeBars.displayAttribute=null;
+	set nodeBars.isShown=false;
+	set nodeLabels.colorAttribute="User selection";
+	set nodeLabels.displayAttribute="bootstrap values";
+	set nodeLabels.fontName="sansserif";
+	set nodeLabels.fontSize=8;
+	set nodeLabels.fontStyle=0;
+	set nodeLabels.isShown=true;
+	set nodeLabels.significantDigits=4;
+	set nodeShapeExternal.colourAttribute="User selection";
+	set nodeShapeExternal.isShown=false;
+	set nodeShapeExternal.minSize=10.0;
+	set nodeShapeExternal.scaleType=Width;
+	set nodeShapeExternal.shapeType=Circle;
+	set nodeShapeExternal.size=4.0;
+	set nodeShapeExternal.sizeAttribute="Fixed";
+	set nodeShapeInternal.colourAttribute="User selection";
+	set nodeShapeInternal.isShown=true;
+	set nodeShapeInternal.minSize=10.0;
+	set nodeShapeInternal.scaleType=Width;
+	set nodeShapeInternal.shapeType=Circle;
+	set nodeShapeInternal.size=4.0;
+	set nodeShapeInternal.sizeAttribute="Fixed";
+	set polarLayout.alignTipLabels=false;
+	set polarLayout.angularRange=0;
+	set polarLayout.rootAngle=0;
+	set polarLayout.rootLength=100;
+	set polarLayout.showRoot=true;
+	set radialLayout.spread=0.0;
+	set rectilinearLayout.alignTipLabels=false;
+	set rectilinearLayout.curvature=0;
+	set rectilinearLayout.rootLength=213;
+	set scale.offsetAge=0.0;
+	set scale.rootAge=1.0;
+	set scale.scaleFactor=1.0;
+	set scale.scaleRoot=false;
+	set scaleAxis.automaticScale=true;
+	set scaleAxis.fontSize=8.0;
+	set scaleAxis.isShown=false;
+	set scaleAxis.lineWidth=1.0;
+	set scaleAxis.majorTicks=1.0;
+	set scaleAxis.minorTicks=0.5;
+	set scaleAxis.origin=0.0;
+	set scaleAxis.reverseAxis=false;
+	set scaleAxis.showGrid=true;
+	set scaleBar.automaticScale=true;
+	set scaleBar.fontSize=10.0;
+	set scaleBar.isShown=true;
+	set scaleBar.lineWidth=1.0;
+	set scaleBar.scaleRange=0.0;
+	set tipLabels.colorAttribute="User selection";
+	set tipLabels.displayAttribute="Names";
+	set tipLabels.fontName="sansserif";
+	set tipLabels.fontSize=8;
+	set tipLabels.fontStyle=0;
+	set tipLabels.isShown=true;
+	set tipLabels.significantDigits=4;
+	set trees.order=false;
+	set trees.orderType="increasing";
+	set trees.rooting=false;
+	set trees.rootingType="User Selection";
+	set trees.transform=false;
+	set trees.transformType="cladogram";
+end;
+
